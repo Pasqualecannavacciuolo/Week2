@@ -1,3 +1,5 @@
+package com.theory;
+
 public class DBConstant {
     public static final String DB_USER = "root";
     public static final String DB_PASS = "Toor123@";
