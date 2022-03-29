@@ -45,7 +45,7 @@ public class DB {
             }
 
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            ex.getMessage();
+            System.out.println(ex.getMessage());
         } finally {
             close(resultSet, statement, connection);
         }

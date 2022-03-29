@@ -8,26 +8,27 @@ public class DBConnection {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-
+        String DB_USER = "root";
+        String DB_PASS = "Toor123@";
+        String DB_URL = "jdbc:mysql://localhost/JDBC?";
+        String DB_MYSQL_URL = "com.mysql.cj.jdbc.Driver";
         try {
 
             Class.forName(DBConstant.DB_MYSQL_URL).newInstance();
 
             connection = DriverManager.getConnection(DBConstant.DB_URL,DBConstant.DB_USER,DBConstant.DB_PASS);
 
+            String sql = "CREATE TABLE `JDBC`.`persona` (" +
+                    "  `idpersona` INT NOT NULL," +
+                    "  `name` VARCHAR(45) NULL," +
+                    " `lastname` VARCHAR(45) NULL," +
+                    "  PRIMARY KEY (`idpersona`));";
+
+
             statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            //resultSet = statement.executeQuery(sql);
 
-            resultSet = statement.executeQuery("SELECT * FROM Studente");
-
-            // Ottengo la dimensione del result set (come ottenere la dimensione di un'array)
-            ResultSetMetaData md = resultSet.getMetaData();
-
-            while (resultSet.next()) {
-                for(int i=1; i<= md.getColumnCount(); i++) {
-                    System.out.println(resultSet.getString(i));
-                }
-                System.out.println("");
-            }
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             ex.getMessage();
         } finally {
