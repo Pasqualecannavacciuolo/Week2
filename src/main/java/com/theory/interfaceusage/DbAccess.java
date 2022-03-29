@@ -1,6 +1,7 @@
 package com.theory.interfaceusage;
 
 import com.theory.DBConstant;
+import com.utility.LOG;
 
 import java.sql.*;
 
@@ -19,21 +20,22 @@ public class DbAccess implements Db<ResultSet>{
     @Override
     public void readDatabase() throws SQLException{
         try {
-
+            LOG L = LOG.getInstance();
             Class.forName(DBConstant.DB_MYSQL_URL).newInstance();
 
             connection = DriverManager.getConnection(DBConstant.DB_URL,DBConstant.DB_USER,DBConstant.DB_PASS);
 
             statement = connection.createStatement();
 
-            resultSet = statement.executeQuery("");
+            resultSet = statement.executeQuery("SELECT * FROM fornitori");
 
             // Ottengo la dimensione del result set (come ottenere la dimensione di un'array)
             ResultSetMetaData md = resultSet.getMetaData();
 
             while (resultSet.next()) {
                 for(int i=1; i<= md.getColumnCount(); i++) {
-                    System.out.println(resultSet.getString(i));
+                    L.info(resultSet.getString(i));
+                    //System.out.println(resultSet.getString(i));
                 }
                 System.out.println("");
             }
