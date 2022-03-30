@@ -55,7 +55,7 @@ public class Singleton {
 
     // PREPARED STATEMENT
     public PreparedStatement getPreparedStatement(String query) throws SQLException {
-        preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement = this.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         return preparedStatement;
     }
 
