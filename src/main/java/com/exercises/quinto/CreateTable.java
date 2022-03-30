@@ -2,7 +2,7 @@ package com.exercises.quinto;
 
 import java.sql.SQLException;
 
-public class CreateTable extends Create implements Runnable{
+public class CreateTable extends Create {
 
     public CreateTable() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         this.connection = singleton.getConnection();
