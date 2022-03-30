@@ -3,7 +3,7 @@ package com.exercises.quinto;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreateSchema extends Create implements Runnable {
+public class CreateSchema extends Create {
 
     public CreateSchema() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         this.connection = singleton.getConnection();

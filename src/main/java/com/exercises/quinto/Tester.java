@@ -22,17 +22,14 @@ public class Tester implements Runnable{
 
             // Create SCHEMA
             TSchema.start();
-            TSchema.join();
             TSchema.setPriority(1);
 
             // Create TABLE
             TTable.start();
-            TTable.join();
             TTable.setPriority(2);
 
             // INSERT into TABLE
             TInsert.start();
-            TInsert.join();
             TInsert.setPriority(3);
 
             // PRINT TABLE ROWS
@@ -51,8 +48,6 @@ public class Tester implements Runnable{
 
         } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             System.out.println(ex.getMessage());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         } finally {
             singleton.closeConnection(resultSet, statement, connection, singleton.getPreparedStatement(String.valueOf(new InsertIntoTable().preparedStatement)));
         }
