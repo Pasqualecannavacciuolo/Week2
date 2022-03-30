@@ -2,7 +2,7 @@ package com.utility;
 
 import org.apache.log4j.*;
 
-public class LOG {
+public class LOG<Type> {
     public static final Logger L = Logger.getLogger(LOG.class);
     public static LOG instance = null;
 
@@ -31,7 +31,7 @@ public class LOG {
      *
      * @param parameter
      */
-    public void info(String parameter) {
+    public void info(Type parameter) {
         L.info(parameter);
     }
 
