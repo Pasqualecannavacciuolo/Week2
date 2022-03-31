@@ -27,7 +27,10 @@ public class Tester {
         Thread thread = new Thread(new CreateTable());
         thread.start();
         thread.setPriority(1);
-        thread = new Thread(new Insert());
+        /*thread = new Thread(new Insert());
+        thread.start();
+        thread.setPriority(2);*/
+        thread = new Thread(new Select());
         thread.start();
         thread.setPriority(2);
     }
