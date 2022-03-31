@@ -42,10 +42,25 @@ public class Select extends DBOperations{
         }
     }
 
+    private void selectDipendentiPerMarchio() throws SQLException {
+        System.out.println("STAMPA NUMERO DIPENDENTI PER NAZIONE");
+        String naz;
+        System.out.print("Inserire la nazionalità da ricercare:");
+        naz = input.next();
+        String sql = "SELECT COUNT(Dipendenti) AS NumeroDipendenti, Nazione FROM JDBC.Auto WHERE Nazione="+"'"+naz+"';";
+        this.resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+            String nazione = resultSet.getString("Nazione");
+            String nDipendenti = resultSet.getString("NumeroDipendenti");
+            System.out.println(nazione + "\t\t" + nDipendenti);
+        }
+    }
+
     @Override
     void operation() throws SQLException {
         selectMarchioFatturato();
         selectNamesByCountry();
+        selectDipendentiPerMarchio();
     }
 
     @Override
