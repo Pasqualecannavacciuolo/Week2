@@ -52,6 +52,21 @@ public class Singleton {
         if(preparedStatement != null)
             preparedStatement.close();
     }
+    public void closeConnection(ResultSet resultSet, Statement statement, Connection connection) throws SQLException {
+
+        if(resultSet != null)
+            resultSet.close();
+
+        if(statement != null)
+            statement.close();
+
+        if(preparedStatement != null)
+            preparedStatement.close();
+
+        if(connection != null)
+            connection.close();
+
+    }
 
 
     // STATEMENT

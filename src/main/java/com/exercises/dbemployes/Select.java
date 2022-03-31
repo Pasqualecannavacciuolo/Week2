@@ -3,7 +3,6 @@ package com.exercises.dbemployes;
 import com.utility.ReadProperties;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
