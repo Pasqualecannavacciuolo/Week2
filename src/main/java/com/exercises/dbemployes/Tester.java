@@ -15,5 +15,7 @@ public class Tester {
         thread = new Thread(new Select());
         thread.start();
         thread.join();
+        Delete delete = new Delete();
+        delete.delete();
     }
 }

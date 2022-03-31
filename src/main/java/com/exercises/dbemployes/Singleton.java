@@ -53,11 +53,6 @@ public class Singleton {
             preparedStatement.close();
     }
 
-    // PREPARED STATEMENT
-    public PreparedStatement getPreparedStatement(String query) throws SQLException {
-        preparedStatement = this.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-        return preparedStatement;
-    }
 
     // STATEMENT
     public Statement createStatement() throws SQLException {
