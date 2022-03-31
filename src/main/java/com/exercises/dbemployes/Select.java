@@ -1,5 +1,9 @@
 package com.exercises.dbemployes;
 
+import com.utility.ReadProperties;
+
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,6 +12,7 @@ import java.util.Scanner;
 public class Select extends DBOperations {
     Statement statement = null;
     PreparedStatement ps = null;
+    ReadProperties readProperties = new ReadProperties();
     Scanner input = new Scanner(System.in);
 
     public Select() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -15,10 +20,12 @@ public class Select extends DBOperations {
         this.statement = singleton.createStatement();
     }
 
+    @SingleValue(value = "selectEmployes")
+    private void selectEmployes() throws SQLException, IOException {
 
-    private void selectEmployes() throws SQLException {
         System.out.println("STAMPA EMPLOYES");
-        String sql = "SELECT * FROM JDBC.Employes;";
+        readProperties.read("employes.properties");
+        String sql = readProperties.properties.getProperty("db.select");
         this.resultSet = statement.executeQuery(sql);
         while (resultSet.next()) {
             String ID = resultSet.getString("ID");
@@ -30,7 +37,7 @@ public class Select extends DBOperations {
 
 
     @Override
-    void operation() throws SQLException {
+    void operation() throws SQLException, IOException {
         selectEmployes();
     }
 
@@ -38,7 +45,7 @@ public class Select extends DBOperations {
     public void run() {
         try {
             operation();
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }

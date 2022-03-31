@@ -1,13 +1,16 @@
 package com.exercises.dbemployes;
 
 import com.utility.LOG;
+import com.utility.ReadProperties;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Insert extends DBOperations {
     Scanner input = new Scanner(System.in);
+    ReadProperties readProperties = new ReadProperties();
     LOG L = LOG.getInstance();
     PreparedStatement ps = null;
     String _name, _lastname;
@@ -30,9 +33,10 @@ public class Insert extends DBOperations {
 
     @Override
     void operation() throws SQLException {
-        String sql = "INSERT INTO `JDBC`.`Employes`(`ID`,`Name`, `LastName`) VALUES (?,?,?);";
         int nInsert;
         try {
+            readProperties.read("employes.properties");
+            String sql = readProperties.properties.getProperty("db.insert");
             System.out.print("Quanti inserimenti vuoi effettuare?: ");
             nInsert = input.nextInt();
             for(int i=0; i<nInsert; i++) {
@@ -48,7 +52,7 @@ public class Insert extends DBOperations {
                 } else L.info("non aggiunto");
             }
 
-        } catch (SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+        } catch (SQLException | IOException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         } finally {
             singleton.closeConnection(this.connection, this.statement);
