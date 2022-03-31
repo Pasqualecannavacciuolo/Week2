@@ -16,10 +16,22 @@ public class Select extends DBOperations {
     }
 
 
+    private void selectEmployes() throws SQLException {
+        System.out.println("STAMPA EMPLOYES");
+        String sql = "SELECT * FROM JDBC.Employes;";
+        this.resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) {
+            String ID = resultSet.getString("ID");
+            String Name = resultSet.getString("Name");
+            String LastName = resultSet.getString("LastName");
+            System.out.println(ID + "\t\t" + Name + "\t\t" + LastName);
+        }
+    }
+
 
     @Override
     void operation() throws SQLException {
-
+        selectEmployes();
     }
 
     @Override

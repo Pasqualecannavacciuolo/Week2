@@ -17,6 +17,17 @@ public class Insert extends DBOperations {
         this.connection = singleton.getConnection();
     }
 
+    private Employe setEmployeData() {
+        System.out.print("\nInserisci ID: ");
+        _id = input.nextInt();
+        System.out.print("\nInserisci nome: ");
+        _name = input.next();
+        System.out.print("\nInserisci cognome: ");
+        _lastname = input.next();
+        Employe e = new Employe(_id, _name, _lastname);
+        return e;
+    }
+
     @Override
     void operation() throws SQLException {
         String sql = "INSERT INTO `JDBC`.`Employes`(`ID`,`Name`, `LastName`) VALUES (?,?,?);";
@@ -25,17 +36,11 @@ public class Insert extends DBOperations {
             System.out.print("Quanti inserimenti vuoi effettuare?: ");
             nInsert = input.nextInt();
             for(int i=0; i<nInsert; i++) {
-                System.out.print("\nInserisci ID: ");
-                _id = input.nextInt();
-                System.out.print("\nInserisci nome: ");
-                _name = input.next();
-                System.out.print("\nInserisci cognome: ");
-                _lastname = input.next();
-
+                Employe tmpE = setEmployeData();
                 ps = singleton.getConnection().prepareStatement(sql);
-                ps.setInt(1, _id);
-                ps.setString(2, _name);
-                ps.setString(3, _lastname);
+                ps.setInt(1, tmpE.getID());
+                ps.setString(2, tmpE.getName());
+                ps.setString(3, tmpE.getLastname());
 
                 if (ps.executeUpdate() != 0) {
                     L.info("Aggiunto ");
