@@ -8,10 +8,10 @@ package com.exercises.progettoauto;
  * dipendenti
  *
  * Query da fare:
- * Elencare marchio e fatturato in ordine discendente
- * Elencare numero di marchi per nazione
- * Elencare numero dipendenti per nazione
- * Elencare per ogni marchio il fatturato in ordine decrescente
+ * Elencare marchio e fatturato in ordine discendente -> fatto
+ * Elencare numero di marchi per nazione -> fatto
+ * Elencare numero dipendenti per nazione -> fatto
+ * Elencare per ogni marchio il fatturato in ordine decrescente -> non fare
  * Elencare il fatturato per nazione in ordine decrescente
  * Eliminare un record tramite ID
  *
