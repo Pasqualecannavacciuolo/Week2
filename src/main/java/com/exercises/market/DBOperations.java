@@ -11,10 +11,12 @@ import java.util.Scanner;
 public class DBOperations implements BaseRepository{
     Scanner input = new Scanner(System.in);
     ReadProperties rd = new ReadProperties();
+    // Singleton utility
     Connection conn = Connection.getInstance();
     Client client;
     Order order;
 
+    // GETTING THE DATA FOR CLIENTS AND ORDERS
     private Client getClientData() {
         System.out.print("\nCodice cliente: ");
         int idClient = input.nextInt();
@@ -83,6 +85,7 @@ public class DBOperations implements BaseRepository{
         }
     }
 
+    // UPDATE DATA IN TABLES
     @Override
     public void update() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         rd.read("marketqueries.properties");
