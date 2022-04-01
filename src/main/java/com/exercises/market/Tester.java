@@ -7,8 +7,9 @@ public class Tester {
     public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         DBOperations dbOperations = new DBOperations();
         dbOperations.create();
-        //dbOperations.insert();
-        //dbOperations.update();
+        dbOperations.insert();
+        dbOperations.update();
         dbOperations.foundByPK();
+        dbOperations.foundByFK();
     }
 }

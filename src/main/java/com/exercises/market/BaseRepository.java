@@ -9,5 +9,5 @@ public interface BaseRepository extends Runnable{
     void update() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException;
     void delete() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException;
     void foundByPK() throws IOException, SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
-    void foundByFK();
+    void foundByFK() throws IOException, SQLException;
 }
