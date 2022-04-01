@@ -1,13 +1,12 @@
 package com.utility;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class ReadProperties {
-    private static LOG L = null;
+    private static com.utility.LOG L = null;
     public Properties properties;
     private InputStream inputStream;
     private String resourceName;
@@ -44,7 +43,7 @@ public class ReadProperties {
 
         try {
 
-            readProperties.read("application.properties");
+            readProperties.read("athletesapplication.properties");
             String db_mysql_url = readProperties.properties.getProperty("db.mysql.url");
             String db_url = readProperties.properties.getProperty("db.url");
             String db_username = readProperties.properties.getProperty("db.username");

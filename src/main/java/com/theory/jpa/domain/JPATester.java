@@ -12,10 +12,6 @@ public class JPATester {
     private EntityManager em;
     private EntityTransaction etx;
 
-    public static void main(String[] args) {
-        JPATester jpaTester = new JPATester();
-        jpaTester.createTransaction();
-    }
     public void init() {
         emf = JPAUtils.getEntityManagerFactory();
         em = emf.createEntityManager();
@@ -37,4 +33,10 @@ public class JPATester {
     public void print() {
 
     }
+
+    public static void main(String[] args) {
+        JPATester jpaTester = new JPATester();
+        jpaTester.createTransaction();
+    }
+
 }

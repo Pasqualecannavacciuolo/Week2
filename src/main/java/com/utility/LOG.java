@@ -1,12 +1,12 @@
 package com.utility;
 
-import org.apache.log4j.*;
+import org.apache.log4j.Logger;
 
 public class LOG<Type> {
     public static final Logger L = Logger.getLogger(LOG.class);
     public static LOG instance = null;
 
-    {BasicConfigurator.configure();}
+    //{BasicConfigurator.configure();}
 
     private LOG(){}
 
@@ -19,34 +19,22 @@ public class LOG<Type> {
         return instance;
     }
 
-    /**
-     *
-     * @param parameter
-     */
+
     public void error(String parameter) {
         L.error(parameter);
     }
 
-    /**
-     *
-     * @param parameter
-     */
+
     public void info(Type parameter) {
         L.info(parameter);
     }
 
-    /**
-     *
-     * @param parameter
-     */
+
     public void debug(String parameter) {
         L.debug(parameter);
     }
 
-    /**
-     *
-     * @param parameter
-     */
+
     public void warn(String parameter) {
         L.warn(parameter);
     }
