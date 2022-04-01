@@ -85,6 +85,29 @@ public class DBOperations implements BaseRepository{
 
     @Override
     public void update() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        rd.read("marketqueries.properties");
+
+        PreparedStatement psClient;
+        String sqlClient = rd.properties.getProperty("db.update.client");
+        System.out.print("\n Nuovo nome: ");
+        String name = input.next();
+        System.out.print("\n idClient a cui cambiare nome: ");
+        int idClient = input.nextInt();
+        psClient = conn.preparePreparedStatement(sqlClient);
+        psClient.setString(1, name);
+        psClient.setInt(2, idClient);
+        conn.executePreparedStatement();
+
+        PreparedStatement psOrder;
+        String sqlOrder = rd.properties.getProperty("db.update.order");
+        System.out.print("\n idOrder da cambiare: ");
+        int idOrder = input.nextInt();
+        System.out.print("\n idOrder nuovo: ");
+        int idOrderNew = input.nextInt();
+        psOrder = conn.preparePreparedStatement(sqlOrder);
+        psOrder.setInt(1, idOrderNew);
+        psOrder.setInt(2, idOrder);
+        conn.executePreparedStatement();
 
     }
 
