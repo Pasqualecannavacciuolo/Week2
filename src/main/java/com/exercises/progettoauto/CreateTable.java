@@ -11,7 +11,7 @@ public class CreateTable extends DBOperations{
 
     @Override
     void operation() throws SQLException {
-        String sql = "CREATE TABLE IF NOT EXISTS `JDBC`.`Auto` (" +
+        String sql = "CREATE TABLE IF NOT EXISTS `JDBC`.`Athlete` (" +
                 "  `ID` INT AUTO_INCREMENT," +
                 "  `Marchio` VARCHAR(45) NOT NULL," +
                 "  `Nazione` VARCHAR(45) NOT NULL," +
