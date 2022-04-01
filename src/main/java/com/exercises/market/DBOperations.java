@@ -5,7 +5,9 @@ import com.exercises.athletes.utility.ReadProperties;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class DBOperations implements BaseRepository{
@@ -13,8 +15,12 @@ public class DBOperations implements BaseRepository{
     ReadProperties rd = new ReadProperties();
     // Singleton utility
     Connection conn = Connection.getInstance();
+    Statement statement = conn.initStatement();
     Client client;
     Order order;
+
+    public DBOperations() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    }
 
     // GETTING THE DATA FOR CLIENTS AND ORDERS
     private Client getClientData() {
@@ -116,6 +122,33 @@ public class DBOperations implements BaseRepository{
 
     @Override
     public void delete() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+    }
+
+    @Override
+    public void foundByPK() throws IOException, SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet resultSet;
+
+        // Inserting the PrimaryKey to search
+        System.out.print("\nPrimaryKey da ricercare: ");
+        int pkToSearch = input.nextInt();
+
+        rd.read("marketqueries.properties");
+        // Composing the query with input data
+        String sql = rd.properties.getProperty("db.found.by.pk")+pkToSearch+";";
+        resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) { // If we have a result we display it
+            String name = resultSet.getString("Name");
+            String lastname = resultSet.getString("LastName");
+            int idCLient = resultSet.getInt("idCLient");
+            int idOrder = resultSet.getInt("idOrder");
+            System.out.println(name + "\t\t" + lastname + "\t\t" + idCLient + "\t\t" + idOrder);
+        }
+        resultSet.close(); // Closing the resultSet
+    }
+
+    @Override
+    public void foundByFK() {
 
     }
 

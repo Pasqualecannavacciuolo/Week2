@@ -8,4 +8,6 @@ public interface BaseRepository extends Runnable{
     void insert() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException;
     void update() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException;
     void delete() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    void foundByPK() throws IOException, SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    void foundByFK();
 }
