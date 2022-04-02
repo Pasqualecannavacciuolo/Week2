@@ -5,16 +5,24 @@ import com.exercises.athletes.utility.ReadProperties;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class DBOperations implements BaseRepository{
     Scanner input = new Scanner(System.in);
     ReadProperties rd = new ReadProperties();
+    // Singleton utility
     Connection conn = Connection.getInstance();
+    Statement statement = conn.initStatement();
     Client client;
     Order order;
 
+    public DBOperations() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    }
+
+    // GETTING THE DATA FOR CLIENTS AND ORDERS
     private Client getClientData() {
         System.out.print("\nCodice cliente: ");
         int idClient = input.nextInt();
@@ -83,14 +91,82 @@ public class DBOperations implements BaseRepository{
         }
     }
 
+    // UPDATE DATA IN TABLES
     @Override
     public void update() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        rd.read("marketqueries.properties");
+
+        PreparedStatement psClient;
+        String sqlClient = rd.properties.getProperty("db.update.client");
+        System.out.print("\n Nuovo nome: ");
+        String name = input.next();
+        System.out.print("\n idClient a cui cambiare nome: ");
+        int idClient = input.nextInt();
+        psClient = conn.preparePreparedStatement(sqlClient);
+        psClient.setString(1, name);
+        psClient.setInt(2, idClient);
+        conn.executePreparedStatement();
+
+        PreparedStatement psOrder;
+        String sqlOrder = rd.properties.getProperty("db.update.order");
+        System.out.print("\n idOrder da cambiare: ");
+        int idOrder = input.nextInt();
+        System.out.print("\n idOrder nuovo: ");
+        int idOrderNew = input.nextInt();
+        psOrder = conn.preparePreparedStatement(sqlOrder);
+        psOrder.setInt(1, idOrderNew);
+        psOrder.setInt(2, idOrder);
+        conn.executePreparedStatement();
 
     }
 
     @Override
     public void delete() throws SQLException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
+    }
+
+    @Override
+    public void foundByPK() throws IOException, SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        ResultSet resultSet;
+
+        // Inserting the PrimaryKey to search
+        System.out.print("\nPrimaryKey da ricercare: ");
+        int pkToSearch = input.nextInt();
+
+        rd.read("marketqueries.properties");
+        // Composing the query with input data
+        String sql = rd.properties.getProperty("db.found.by.pk")+pkToSearch+";";
+        resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) { // If we have a result we display it
+            String name = resultSet.getString("Name");
+            String lastname = resultSet.getString("LastName");
+            int idCLient = resultSet.getInt("idCLient");
+            int idOrder = resultSet.getInt("idOrder");
+            System.out.println(name + "\t\t" + lastname + "\t\t" + idCLient + "\t\t" + idOrder);
+        }
+        resultSet.close(); // Closing the resultSet
+    }
+
+    @Override
+    public void foundByFK() throws IOException, SQLException {
+        ResultSet resultSet;
+
+        // Inserting the PrimaryKey to search
+        System.out.print("\nForeignKey da ricercare: ");
+        int fkToSearch = input.nextInt();
+
+        rd.read("marketqueries.properties");
+        // Composing the query with input data
+        String sql = rd.properties.getProperty("db.found.by.fk")+fkToSearch+";";
+        resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) { // If we have a result we display it
+            String name = resultSet.getString("Name");
+            String lastname = resultSet.getString("LastName");
+            int idCLient = resultSet.getInt("idCLient");
+            int idOrder = resultSet.getInt("idOrder");
+            System.out.println(name + "\t\t" + lastname + "\t\t" + idCLient + "\t\t" + idOrder);
+        }
+        resultSet.close(); // Closing the resultSet
     }
 
     @Override

@@ -8,5 +8,8 @@ public class Tester {
         DBOperations dbOperations = new DBOperations();
         dbOperations.create();
         dbOperations.insert();
+        dbOperations.update();
+        dbOperations.foundByPK();
+        dbOperations.foundByFK();
     }
 }
